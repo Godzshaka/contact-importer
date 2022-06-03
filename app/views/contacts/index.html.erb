@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Imported Contacts</h1>
+
+<div id="contacts">
+
+  <% @contacts.each do |contact| %>
+    <%= render contact %>
+    <p>
+      <%= link_to "Show this contact", contact %>
+    </p>
+    <br><br>
+  <% end %>
+</div>
+<br>
+<%= paginate @contacts %>

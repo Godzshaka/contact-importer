@@ -1,0 +1,12 @@
+name,date_of_birth,phone,address,credit_card,franchise,e-mail
+tester1,2020-07-10,(+57)320 432 05 09,x street,371449635398431,American Express,yago@test.com
+tester2,2020-07-11,(+57)327-123-75-89,y street,30569309025904,Diners Club,test@yago.com
+tester3,2020-07-12,(+57)327-123-75-90,y street,6011111111111117,Discover,Test@15.com
+tester4,2020-07-13,(+57)327-123-75-91,y street,3530111333300000,JCB,test@1.com
+tester5,2020-07-14,(+57)327-123-75-92,y street,5555555555554444,MasterCard,test@2.com
+tester6,2020-07-15,(+57)327-123-75-93,y street,4111111111111111,Visa,test2@2.com
+tester7,2020-07-16,(+57)327-123-75-94,y street,4111111111111112,Visa,Test2@3.com
+tester8,2020-07-17,(+57)327-123-75-95,y street,4111111111111113,Visa,4Test2@2.com
+tester9,2020-07-18,(+57)327-123-75-96,y street,4111111111111114,Visa,Test6@2.com
+tester10,2020-07-19,(+57)327-123-75-97,y street,4111111111111115,Visa,testyago.com
+tester11,2020-07-20,(+57)327-123-75-98,y street,4111111111111116,Visa,yago@test.com

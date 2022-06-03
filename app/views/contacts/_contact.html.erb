@@ -1,0 +1,41 @@
+<div id="<%= dom_id contact %>">
+  <p>
+    <strong>Name:</strong>
+    <%= contact.name %>
+  </p>
+
+  <p>
+    <strong>Date of birth:</strong>
+    <%= contact.date_of_birth.strftime('%Y %B %e') %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= contact.phone %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= contact.address %>
+  </p>
+
+  <p>
+    <strong>Credit card:</strong>
+    <%= "*"*contact.card_number_length << contact.card_last_digits %>
+  </p>
+
+  <p>
+    <strong>Franchise:</strong>
+    <%= contact[:franchise] %>
+  </p>
+
+  <p>
+    <strong>Import:</strong>
+    <%= contact[:import_id] %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= contact[:email] %>
+  </p>
+</div>
