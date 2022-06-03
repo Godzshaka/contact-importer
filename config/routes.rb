@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 # mount Sidekiq::Web => '/sidekiq'
 
@@ -9,7 +11,6 @@ Rails.application.routes.draw do
 
   devise_for :users
   root 'pages#home'
-  # 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

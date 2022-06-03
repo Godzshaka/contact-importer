@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ImportContactsJob
   include Sidekiq::Job
   # include Sidekiq::Worker

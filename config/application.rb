@@ -1,6 +1,8 @@
-require_relative "boot"
+# frozen_string_literal: true
 
-require "rails/all"
+require_relative 'boot'
+
+require 'rails/all'
 require 'csv'
 
 # Require the gems listed in Gemfile, including any gems
@@ -13,7 +15,5 @@ module ContactImporter
     config.load_defaults 7.0
 
     config.active_job.queue_adapter = :sidekiq
-
-
   end
 end

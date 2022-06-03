@@ -1,55 +1,57 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class ContactsTest < ApplicationSystemTestCase
   setup do
     @contact = contacts(:one)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit contacts_url
-    assert_selector "h1", text: "Contacts"
+    assert_selector 'h1', text: 'Contacts'
   end
 
-  test "should create contact" do
+  test 'should create contact' do
     visit contacts_url
-    click_on "New contact"
+    click_on 'New contact'
 
-    fill_in "Address", with: @contact.address
-    fill_in "Credit card", with: @contact.credit_card
-    fill_in "Date of birth", with: @contact.date_of_birth
-    fill_in "Email", with: @contact.email
-    fill_in "Franchise", with: @contact.franchise
-    fill_in "Name", with: @contact.name
-    fill_in "Phone", with: @contact.phone
-    fill_in "User", with: @contact.user_id
-    click_on "Create Contact"
+    fill_in 'Address', with: @contact.address
+    fill_in 'Credit card', with: @contact.credit_card
+    fill_in 'Date of birth', with: @contact.date_of_birth
+    fill_in 'Email', with: @contact.email
+    fill_in 'Franchise', with: @contact.franchise
+    fill_in 'Name', with: @contact.name
+    fill_in 'Phone', with: @contact.phone
+    fill_in 'User', with: @contact.user_id
+    click_on 'Create Contact'
 
-    assert_text "Contact was successfully created"
-    click_on "Back"
+    assert_text 'Contact was successfully created'
+    click_on 'Back'
   end
 
-  test "should update Contact" do
+  test 'should update Contact' do
     visit contact_url(@contact)
-    click_on "Edit this contact", match: :first
+    click_on 'Edit this contact', match: :first
 
-    fill_in "Address", with: @contact.address
-    fill_in "Credit card", with: @contact.credit_card
-    fill_in "Date of birth", with: @contact.date_of_birth
-    fill_in "Email", with: @contact.email
-    fill_in "Franchise", with: @contact.franchise
-    fill_in "Name", with: @contact.name
-    fill_in "Phone", with: @contact.phone
-    fill_in "User", with: @contact.user_id
-    click_on "Update Contact"
+    fill_in 'Address', with: @contact.address
+    fill_in 'Credit card', with: @contact.credit_card
+    fill_in 'Date of birth', with: @contact.date_of_birth
+    fill_in 'Email', with: @contact.email
+    fill_in 'Franchise', with: @contact.franchise
+    fill_in 'Name', with: @contact.name
+    fill_in 'Phone', with: @contact.phone
+    fill_in 'User', with: @contact.user_id
+    click_on 'Update Contact'
 
-    assert_text "Contact was successfully updated"
-    click_on "Back"
+    assert_text 'Contact was successfully updated'
+    click_on 'Back'
   end
 
-  test "should destroy Contact" do
+  test 'should destroy Contact' do
     visit contact_url(@contact)
-    click_on "Destroy this contact", match: :first
+    click_on 'Destroy this contact', match: :first
 
-    assert_text "Contact was successfully destroyed"
+    assert_text 'Contact was successfully destroyed'
   end
 end

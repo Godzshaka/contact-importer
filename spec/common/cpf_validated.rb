@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 shared_examples_for 'cpf_validated' do
-
   let(:model) { described_class }
   let(:object) { mock_operator_api { build(model.to_s.underscore) } }
   let(:field) { model.column_names.find { |column| column =~ /cpf/ }.to_sym }

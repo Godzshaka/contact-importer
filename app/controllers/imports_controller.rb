@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ImportsController < ApplicationController
   require './app/services/import_service'
 
-  before_action :set_import, only: %i[ show edit update destroy ]
+  before_action :set_import, only: %i[show edit update destroy]
 
   # GET /imports or /imports.json
   def index
@@ -9,8 +11,7 @@ class ImportsController < ApplicationController
   end
 
   # GET /imports/1 or /imports/1.json
-  def show
-  end
+  def show; end
 
   # GET /imports/new
   def new
@@ -18,8 +19,7 @@ class ImportsController < ApplicationController
   end
 
   # GET /imports/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /imports or /imports.json
   def create
@@ -27,7 +27,7 @@ class ImportsController < ApplicationController
 
     respond_to do |format|
       if @import.save
-        format.html { redirect_to import_url(@import), notice: "Import was successfully created." }
+        format.html { redirect_to import_url(@import), notice: 'Import was successfully created.' }
         format.json { render :show, status: :created, location: @import }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ImportsController < ApplicationController
   def update
     respond_to do |format|
       if @import.update(import_params)
-        format.html { redirect_to import_url(@import), notice: "Import was successfully updated." }
+        format.html { redirect_to import_url(@import), notice: 'Import was successfully updated.' }
         format.json { render :show, status: :ok, location: @import }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,21 +54,21 @@ class ImportsController < ApplicationController
     @import.destroy
 
     respond_to do |format|
-      format.html { redirect_to imports_url, notice: "Import was successfully destroyed." }
+      format.html { redirect_to imports_url, notice: 'Import was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def import
     import_instance = Import.create(
-      status: "On Hold", 
-      user_id: current_user.id, 
-      error:"", 
+      status: 'On Hold',
+      user_id: current_user.id,
+      error: '',
       filename: params[:file].original_filename
     )
-    
+
     file = File.open(Rails.root.join("/tmp/#{params[:file].original_filename}"), 'w')
-    file.write(params["file"].read)
+    file.write(params['file'].read)
     file.close
 
     ImportContactsJob.perform_async(current_user.id, import_instance.id)
@@ -77,12 +77,12 @@ class ImportsController < ApplicationController
     # return if parsed_csv.count == 0
 
     # import_instance = Import.create(
-    #   status: "On Hold", 
-    #   user_id: current_user.id, 
-    #   error:"", 
+    #   status: "On Hold",
+    #   user_id: current_user.id,
+    #   error:"",
     #   filename: params["file"].original_filename
     # )
-    
+
     # import_instance.update(status: "Processing")
 
     # parsed_csv.each do |row|
@@ -107,15 +107,15 @@ class ImportsController < ApplicationController
     redirect_to root_path
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_import
-      @import = Import.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def import_params
-      params.require(:import).permit(:status, :error, :filename, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_import
+    @import = Import.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def import_params
+    params.require(:import).permit(:status, :error, :filename, :user_id)
+  end
 end
