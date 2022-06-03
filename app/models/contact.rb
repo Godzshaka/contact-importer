@@ -5,6 +5,12 @@ class Contact < ApplicationRecord
   belongs_to :user
   belongs_to :import
 
+  validates :name,  presence: true
+  validates :address,  presence: true
+  validates :date_of_birth,  presence: true
+  validates :phone,  presence: true
+  validates :credit_card,  presence: true
+  validates :email,  presence: true
   validate :name_format
   validate :date_format
   validate :phone_format
