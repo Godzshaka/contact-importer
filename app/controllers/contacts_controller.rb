@@ -2,10 +2,14 @@
 
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[show edit update destroy]
+  before_action :ensure_logged_in
 
+  def ensure_logged_in
+    redirect_to root_path unless current_user
+  end
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.page(params[:page]).per(5)
+    @contacts = current_user.contacts.page(params[:page]).per(5)
   end
 
   # GET /contacts/1 or /contacts/1.json

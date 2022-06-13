@@ -3,14 +3,12 @@
 <h1>Imported Contacts</h1>
 
 <div id="contacts">
-
   <% @contacts.each do |contact| %>
     <%= render contact %>
-    <p>
-      <%= link_to "Show this contact", contact %>
-    </p>
-    <br><br>
+    <br>
   <% end %>
 </div>
-<br>
 <%= paginate @contacts %>
+<br>
+<%= link_to "Home", root_path %>
+<%= link_to "Import a new CSV", new_import_path %>

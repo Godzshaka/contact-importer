@@ -58,11 +58,12 @@ group :development, :test do
   gem 'byebug'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
-  gem 'factory_bot'
+  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
   gem 'faker'
   gem 'lockbox'
   gem 'pry'
   gem 'rspec'
+  gem 'rspec-rails', '~> 6.0.0.rc1'
   gem 'rubocop'
   gem 'rubocop-junit_formatter'
   gem 'rubocop-performance'

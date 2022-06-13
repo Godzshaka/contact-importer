@@ -19,6 +19,4 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -\
 # for postgres
 RUN apt-get install -y libpq-dev
 
-# COPY . .
-
-CMD ["./your-daemon-or-script.rb"]
+COPY . /app
