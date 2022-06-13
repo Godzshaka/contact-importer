@@ -1,0 +1,10 @@
+name,date_of_birth,phone,address,credit_card,franchise,e-mail
+tester,2020/07/10,(+57) 320 432 05 09,x street,371449635398431,,yago@test.com
+tester2,2020-07-11,573271237589,y street,30569309025904,,test@yago.com
+,2020-07-12,(+57) 327-123-75-90,y street,6011111111111117,,test@15.com
+tester4,2020-07-13,(+57) 327-123-75-91,,3530111333300000,,test@1.com
+tester5,2020-07-14,(+57) 327-123-75-92,y street,,,test@2.com
+tester6,2020-07-15,(+57) 327-123-75-93,y street,4111111111111111,,
+tester7,2020-07-16,(+57) 327-123-75-94,y street,4111111111111111,,Test2
+tester8,2020-07-17,,y street,4111111111111111,,4test2@2.com
+tester9,,(+57) 327-123-75-01,y street,4111111111111111,,yago1@test.com
