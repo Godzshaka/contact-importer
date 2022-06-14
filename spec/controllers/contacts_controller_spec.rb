@@ -13,7 +13,9 @@ RSpec.describe ContactsController, type: :controller do
         expect(response.status).to eq(302)
       end
     end
-
+  # params = {asdasd}.merge(eamil: errado)
+  # contact = Contact.import_from_csv(params, user, import.id)
+  # contact.validate.errors > 0
     context 'as logged user' do
       let(:user){create :user}
 
@@ -30,10 +32,6 @@ RSpec.describe ContactsController, type: :controller do
         before do
           contact.reload
         end
-        # let(:contact) {build :contact, email:'batata'}
-        # c = Contact.new(asdjaskld)
-        # c.validate
-        # c.save
 
         it 'shows contacts for this user' do
           get :index
@@ -50,8 +48,8 @@ RSpec.describe ContactsController, type: :controller do
 
           it 'doesnt show other user contacts' do
             get :index
-            
-            expect(response.body).not_to include(other_contact.name)
+
+            expect(response.body).not_to include(other_contact.email)
           end
         end
       end

@@ -2,7 +2,7 @@
 FactoryBot.define do
   credit_card = Faker::Finance.credit_card(:mastercard)
     factory :contact do
-        name { Faker::Name.name }
+        name { 'tester' }
         date_of_birth { Time.now-20.years }
         phone { Faker::Base.numerify('(+##) ###-###-##-##').to_s }
         address { Faker::Address.street_address }

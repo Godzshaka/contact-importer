@@ -72,38 +72,7 @@ class ImportsController < ApplicationController
     file.close
 
     ImportContactsJob.perform_async(current_user.id, import_instance.id)
-    # ImportService.new(current_user.id, params["file"]).import_contacts
-    # parsed_csv = CSV.read(params["file"], headers: true)
-    # return if parsed_csv.count == 0
 
-    # import_instance = Import.create(
-    #   status: "On Hold",
-    #   user_id: current_user.id,
-    #   error:"",
-    #   filename: params["file"].original_filename
-    # )
-
-    # import_instance.update(status: "Processing")
-
-    # parsed_csv.each do |row|
-    #   contact = Contact.import_from_csv(row, current_user.id, import_instance.id)
-
-    #   unless contact.save { import_instance.error << contact.errors.to_s }
-    # end
-
-    # import_instance.save
-
-    # if import_instance.contacts.count > 0
-    #   import_instance.update(status: "Finished")
-    # else
-    #   import_instance.update(status: "Failed")
-    # end
-
-    # if import_instance == "Finished"
-    #   redirect_to root_path, notice: "Contacts imported successfully, status: Finished!"
-    # else
-    #   redirect_to root_path, alert: "Something serious happened, status: Failed"
-    # end
     redirect_to root_path
   end
 
