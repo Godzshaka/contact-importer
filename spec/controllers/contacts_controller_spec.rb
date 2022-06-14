@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require_relative '../support/devise'
 
 RSpec.describe ContactsController, type: :controller do
   render_views
@@ -13,9 +12,7 @@ RSpec.describe ContactsController, type: :controller do
         expect(response.status).to eq(302)
       end
     end
-  # params = {asdasd}.merge(eamil: errado)
-  # contact = Contact.import_from_csv(params, user, import.id)
-  # contact.validate.errors > 0
+    
     context 'as logged user' do
       let(:user){create :user}
 

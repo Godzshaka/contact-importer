@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class ImportContactsJob
-  include Sidekiq::Job
+class ImportContactsJob < ApplicationJob
+  # include Sidekiq::Job
   # include Sidekiq::Worker
 
   def perform(user_id, import_id)

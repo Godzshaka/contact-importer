@@ -25,12 +25,14 @@ require 'rspec/rails'
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 FactoryBot.reload
+ActiveJob::Base.queue_adapter = :test
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+
   # config.include Devise::TestHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :controller
   # Devise::Test::ControllerHelpers

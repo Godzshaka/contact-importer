@@ -3,6 +3,12 @@
 class ImportsController < ApplicationController
   require './app/services/import_service'
 
+  before_action :ensure_logged_in
+
+  def ensure_logged_in
+    redirect_to root_path unless current_user
+  end
+
   before_action :set_import, only: %i[show edit update destroy]
 
   # GET /imports or /imports.json
@@ -60,20 +66,25 @@ class ImportsController < ApplicationController
   end
 
   def import
-    import_instance = Import.create(
-      status: 'On Hold',
-      user_id: current_user.id,
-      error: '',
-      filename: params[:file].original_filename
-    )
+    # binding.pry
+    begin
+      import_instance = Import.create(
+        status: 'On Hold',
+        user_id: current_user.id,
+        error: '',
+        filename: params[:file]&.original_filename
+      )
 
-    file = File.open(Rails.root.join("/tmp/#{params[:file].original_filename}"), 'w')
-    file.write(params['file'].read)
-    file.close
+      file = File.open(Rails.root.join("/tmp/#{params[:file].original_filename}"), 'w')
+      file.write(params['file'].read)
+      file.close
 
-    ImportContactsJob.perform_async(current_user.id, import_instance.id)
-
-    redirect_to root_path
+      ImportContactsJob.perform_later(current_user.id, import_instance.id)
+      # binding.pry
+      redirect_to root_path
+    rescue
+      render :json => "You uploaded an invalid file"
+    end
   end
 
   private
