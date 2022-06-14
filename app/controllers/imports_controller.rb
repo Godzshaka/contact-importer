@@ -66,7 +66,6 @@ class ImportsController < ApplicationController
   end
 
   def import
-    # binding.pry
     begin
       import_instance = Import.create(
         status: 'On Hold',
@@ -80,7 +79,7 @@ class ImportsController < ApplicationController
       file.close
 
       ImportContactsJob.perform_later(current_user.id, import_instance.id)
-      # binding.pry
+
       redirect_to root_path
     rescue
       render :json => "You uploaded an invalid file"
