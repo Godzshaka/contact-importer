@@ -66,24 +66,22 @@ class ImportsController < ApplicationController
   end
 
   def import
-    begin
-      import_instance = Import.create(
-        status: 'On Hold',
-        user_id: current_user.id,
-        error: '',
-        filename: params[:file]&.original_filename
-      )
+    import_instance = Import.create(
+      status: 'On Hold',
+      user_id: current_user.id,
+      error: '',
+      filename: params[:file]&.original_filename
+    )
 
-      file = File.open(Rails.root.join("/tmp/#{params[:file].original_filename}"), 'w')
-      file.write(params['file'].read)
-      file.close
+    file = File.open(Rails.root.join("/tmp/#{params[:file].original_filename}"), 'w')
+    file.write(params['file'].read)
+    file.close
 
-      ImportContactsJob.perform_later(current_user.id, import_instance.id)
+    ImportContactsJob.perform_later(current_user.id, import_instance.id)
 
-      redirect_to root_path
-    rescue
-      render :json => "You uploaded an invalid file"
-    end
+    redirect_to root_path
+  rescue StandardError
+    render json: 'You uploaded an invalid file'
   end
 
   private

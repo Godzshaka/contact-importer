@@ -40,19 +40,15 @@ class Contact < ApplicationRecord
   private
 
   def self.hidden_credit_card_numbers(credit_card_number)
-    begin
-      credit_card_number.length - @revealed_card_numbers
-    rescue
-      nil
-    end
+    credit_card_number.length - @revealed_card_numbers
+  rescue StandardError
+    nil
   end
 
   def self.card_number_four_digits(credit_card)
-    begin
-      credit_card[-@revealed_card_numbers..-1] || credit_card
-    rescue
-      nil
-    end
+    credit_card[-@revealed_card_numbers..-1] || credit_card
+  rescue StandardError
+    nil
   end
 
   def self.encrypt_credit_card(credit_card_number)
@@ -66,6 +62,7 @@ class Contact < ApplicationRecord
     detector = CreditCardValidations::Detector.new(credit_card_number)
     detector.brand.to_s
   end
+
   # validations
   def name_format
     special = "?<>',?[]}{=)_(*&^%$#`~{}"
@@ -74,23 +71,21 @@ class Contact < ApplicationRecord
   end
 
   def date_format
-    begin
-      unless date_of_birth.to_datetime.strftime('%F') == date_of_birth.to_s ||
-            date_of_birth.to_datetime.strftime('%Y%m%d') == date_of_birth.to_s
-        errors.add(
-          :date_of_birth,
-          "date of birth in wrong format,
-          please use YYYY-MM-DD or YYYYMMDD format"
-        )
-      end
-    rescue
+    unless date_of_birth.to_datetime.strftime('%F') == date_of_birth.to_s ||
+           date_of_birth.to_datetime.strftime('%Y%m%d') == date_of_birth.to_s
       errors.add(
-          :date_of_birth,
-          "The value for date is not a valid date"
-        )
+        :date_of_birth,
+        "date of birth in wrong format,
+          please use YYYY-MM-DD or YYYYMMDD format"
+      )
     end
+  rescue StandardError
+    errors.add(
+      :date_of_birth,
+      'The value for date is not a valid date'
+    )
   end
-  
+
   def phone_format
     regex = /^\(\+\d{2}\)\s\d{3}(\s|-)\d{3}(\s|-)\d{2}(\s|-)\d{2}$/
     unless phone&.match(regex)

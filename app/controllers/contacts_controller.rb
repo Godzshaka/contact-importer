@@ -7,6 +7,7 @@ class ContactsController < ApplicationController
   def ensure_logged_in
     redirect_to root_path unless current_user
   end
+
   # GET /contacts or /contacts.json
   def index
     @contacts = current_user.contacts.page(params[:page]).per(5)

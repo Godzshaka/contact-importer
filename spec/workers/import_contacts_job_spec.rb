@@ -7,9 +7,9 @@ RSpec.describe ImportContactsJob, type: :worker do
     subject(:perform) { described_class.perform_now(user.id, import.id) }
 
     context 'when passing right params' do
-      let(:import){create :import}
-      let(:user){create :user}
-      let(:import_service_instance) {instance_double(ImportService)}
+      let(:import) { create :import }
+      let(:user) { create :user }
+      let(:import_service_instance) { instance_double(ImportService) }
 
       before do
         allow(ImportService).to receive(:new).and_return(import_service_instance)
