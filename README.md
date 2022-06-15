@@ -11,6 +11,7 @@ This test was proposed by Koombea
 - Enter the container: `docker exec -it contact-importer-api-web bash`
 - Run bundle to install gems: `bundle install`
 - Create the database: `rails db:setup`
+- Start Sidekiq service in another terminal: `sidekiq`
 - Start the application: `rails s -b 0.0.0.0`
 - Access the application on `localhost:3000`
 
