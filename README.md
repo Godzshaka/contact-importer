@@ -1,28 +1,21 @@
 # Contact-importer
 This test was proposed by Koombea
 
-# Development
+## System requirements
 
-## Setup
-# To build docker cointainers, please run commands below:
+- Docker
 
-# docker-compose up -d --build
+## Running the application locally
 
-# docker exec -it contact-importer-api-web bash
+- Start the container on sleep mode: `docker-compose up -d --build`
+- Enter the container: `docker exec -it contact-importer-api-web bash`
+- Run bundle to install gems: `bundle install`
+- Create the database: `rails db:setup`
+- Start the application: `rails s -b 0.0.0.0`
+- Access the application on `localhost:3000`
 
-# bundle
+# Created user (but you are welcome to create another ones if you want to)
+- email: test@koombea.com
+- password: test123
 
-# rails db:setup
-
-# rails db:seed
-
-# rails s -b 0.0.0.0
-
-## In order to access application, please access http://localhost:3000/ on browser
-
-## Created user (but you are welcome to create another if you want to)
-# email: test@koombea.com
-# password: test123
-
-
-## CSV Example for contacts import located on spec/fixture/sheet/contacts.csv
+# CSV Examples for contacts import located on spec/fixture/sheet/

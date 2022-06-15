@@ -8,11 +8,17 @@ class ImportService
 
   def import_contacts
     import = Import.find(@import_id)
+
     file_name = Rails.root.join("/tmp/#{import.filename}")
     parsed_csv = CSV.read(file_name, headers: true)
 
-    return if parsed_csv.count.zero?
-
+    if parsed_csv.count.zero?
+      import.update(status: 'Failed')
+      import.error << "The sheet is empty"
+      import.save
+      return
+    end
+    
     import.update(status: 'Processing')
 
     parsed_csv.each_with_index do |row, index|
@@ -21,7 +27,7 @@ class ImportService
       import.error << "Error on row number #{index+2}" unless contact.save
       import.error << contact.errors.messages.to_s unless contact.save
     end
-
+    
     import.save
 
     if import.contacts.count.positive?

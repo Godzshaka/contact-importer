@@ -16,6 +16,7 @@ class Contact < ApplicationRecord
   validate :date_format
   validate :phone_format
   validate :email_format
+  validates :credit_card, presence: true
   validates :email, uniqueness: { scope: :user_id }
 
   @revealed_card_numbers = 4
@@ -26,7 +27,7 @@ class Contact < ApplicationRecord
       address: row['address'],
       date_of_birth: row['date_of_birth'],
       phone: row['phone'],
-      card_number_length: row['credit_card'].length - @revealed_card_numbers,
+      card_number_length: hidden_credit_card_numbers(row['credit_card']),
       card_last_digits: card_number_four_digits(row['credit_card']),
       credit_card: encrypt_credit_card(row['credit_card']),
       franchise: retrieve_franchise(row['credit_card']),
@@ -38,13 +39,27 @@ class Contact < ApplicationRecord
 
   private
 
+  def self.hidden_credit_card_numbers(credit_card_number)
+    begin
+      credit_card_number.length - @revealed_card_numbers
+    rescue
+      nil
+    end
+  end
+
   def self.card_number_four_digits(credit_card)
-    credit_card[-@revealed_card_numbers..-1] || credit_card
+    begin
+      credit_card[-@revealed_card_numbers..-1] || credit_card
+    rescue
+      nil
+    end
   end
 
   def self.encrypt_credit_card(credit_card_number)
-    crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base[0..31])
-    crypt.encrypt_and_sign(credit_card_number)
+    if credit_card_number.present?
+      crypt = ActiveSupport::MessageEncryptor.new(Rails.application.secrets.secret_key_base[0..31])
+      crypt.encrypt_and_sign(credit_card_number)
+    end
   end
 
   def self.retrieve_franchise(credit_card_number)
